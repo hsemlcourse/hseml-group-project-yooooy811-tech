@@ -1,9 +1,9 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/kOqwghv0)
 # ML Project — [Название проекта]
 
-**Студент:** [ФИО / Student ID]
+**Студент:** [Липчанская Софья Игоревна]
 
-**Группа:** [Группа]
+**Группа:** [БИВ238]
 
 
 ## Оглавление
@@ -18,27 +18,25 @@
 
 ## Описание задачи
 
-<!-- Кратко опишите задачу: что предсказываем, какой датасет, метрика качества -->
+По характеристикам заказа (тип доставки, регион, категория товара, способ оплаты, размер скидки и др.) необходимо предсказать, будет ли доставка задержана.
 
-**Задача:** [Классификация / Регрессия / Кластеризация / ...]
+**Задача:** [Бинарная классификация]
 
-**Датасет:** [Название и источник датасета]
+**Датасет:** [DataCo Smart Supply Chain](https://www.kaggle.com/datasets/shashwatwork/dataco-smart-supply-chain-for-big-data-analysis) — 180 519 строк, 53 колонки
 
-**Целевая метрика:** [Accuracy / F1 / RMSE / ...]
+**Целевая метрика:** [F1-score (дополнительно: Accuracy, ROC-AUC)]
 
 
 ## Структура репозитория
-Опишите структуру проекта, сохранив при этом верхнеуровневые папки. Можно добавить новые при необходимости.
+
 ```
 .
 ├── data
 │   ├── processed               # Очищенные и обработанные данные
-│   └── raw                     # Исходные файлы
-├── models                      # Сохранённые модели 
+│   └── raw                     # Исходный датасет DataCo
+├── models                      # Сохранённые модели
 ├── notebooks
-│   ├── 01_eda.ipynb            # EDA
-│   ├── 02_baseline.ipynb       # Baseline-модель
-│   └── 03_experiments.ipynb    # Эксперименты и ablation study
+│   └── eda.ipynb               # EDA + baseline + эксперименты
 ├── presentation                # Презентация для защиты
 ├── report
 │   ├── images                  # Изображения для отчёта
@@ -54,32 +52,36 @@
 
 ## Запуск
 
-Этот блок замените способом запуска вашего сервиса.
 ```bash
 # 1. Клонировать репозиторий
-git clone <url>
-cd <repo-name>
+git clone https://github.com/hsemlcourse/hseml-group-project-yooooy811-tech.git
+cd hseml-group-project-yooooy811-tech
 
 # 2. Создать виртуальное окружение
 python -m venv .venv
-source .venv/bin/activate   # Linux/macOS
-# .venv\Scripts\activate    # Windows
+.venv\Scripts\activate
 
 # 3. Установить зависимости
 pip install -r requirements.txt
+
+# 4. Скачать датасет с Kaggle и положить в data/raw/
+
+# 5. Запустить ноутбук
+jupyter notebook notebooks/eda.ipynb
 ```
 
 ## Данные
-- `data/raw/` — исходные файлы
+- `data/raw/` — исходный файл `DataCoSupplyChainDataset.csv`
 - `data/processed/` — предобработанные данные
 
 
 ## Результаты
-Здесь коротко выпишите результаты.
-| Модель | [Метрика 1] | [Метрика 2] | Примечание |
-|--------|-------------|-------------|------------|
-| Baseline | — | — | |
-| Лучшая модель | — | — | |
+
+| Модель | Accuracy | F1-score | ROC-AUC | Примечание |
+|--------|----------|----------|---------|------------|
+| Logistic Regression (baseline) | 0.7206 | 0.6875 | 0.7377 | |
+| Decision Tree | 0.7327 | 0.7111 | 0.7468 | max_depth=10 |
+| Random Forest | 0.7569 | 0.7503 | 0.7666 | n_estimators=100 |
 
 
 ## Отчёт
